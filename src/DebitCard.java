@@ -1,5 +1,5 @@
 
-public class DebitCard 
+public class DebitCard
 {
 	private static int fLastDebitCardNumber;
 	private CheckingAccount fAccountConnectedTo;
@@ -9,20 +9,8 @@ public class DebitCard
 	private String fTown;
 	private String fZipCode;
 	private String fCountry;
-	
-	
-	public DebitCard(String name, String street, String town, String zipCode, String country)
-	{
-		fName = name;
-		fStreet = street;
-		fTown = town;
-		fZipCode = zipCode;
-		fCountry = country;
-		fDebitCardNumber = fLastDebitCardNumber;
-		fLastDebitCardNumber++;
-	}
-	
-	public DebitCard(String name, String street, String town, String zipCode, String country, double limit, CheckingAccount account)
+
+	public DebitCard(String name, String street, String town, String zipCode, String country, CheckingAccount account)
 	{
 		fName = name;
 		fStreet = street;
@@ -33,7 +21,7 @@ public class DebitCard
 		fLastDebitCardNumber++;
 		fAccountConnectedTo = account;
 	}
-	
+
 	public boolean pay(double amount)
 	{
 		if((fAccountConnectedTo.getBalance() - amount) < -fAccountConnectedTo.getDebitAmount())

@@ -4,19 +4,9 @@ public class DebitCard
 	private static int fLastDebitCardNumber;
 	private CheckingAccount fAccountConnectedTo;
 	private int fDebitCardNumber;
-	private String fName;
-	private String fStreet;
-	private String fTown;
-	private String fZipCode;
-	private String fCountry;
 
-	public DebitCard(String name, String street, String town, String zipCode, String country, CheckingAccount account)
+	public DebitCard(CheckingAccount account)
 	{
-		fName = name;
-		fStreet = street;
-		fTown = town;
-		fZipCode = zipCode;
-		fCountry = country;
 		fDebitCardNumber = fLastDebitCardNumber;
 		fLastDebitCardNumber++;
 		fAccountConnectedTo = account;
@@ -34,5 +24,9 @@ public class DebitCard
 			return false;
 		}
 	}
+
+    public int getfDebitCardNumber() {
+        return fDebitCardNumber;
+    }
 
 }

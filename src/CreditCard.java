@@ -12,18 +12,13 @@ public class CreditCard
 	private double fLimit; // you cannot spend more than this limit
 	private double fBalance;
 
-	public CreditCard(String name, String street, String town, String zipCode, String country)
+	public CreditCard()
 	{
-		this(name, street, town, zipCode, country, 2500);
+		this(2500);
 	}
 
-	public CreditCard(String name, String street, String town, String zipCode, String country, double limit)
+	public CreditCard(double limit)
 	{
-		fName = name;
-		fStreet = street;
-		fTown = town;
-		fzipCode = zipCode;
-		fCountry = country;
 		fLimit = limit;
 		fBalance = 0;
 	}

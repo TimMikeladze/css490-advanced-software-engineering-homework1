@@ -1,46 +1,47 @@
-import java.util.Vector;
+import java.util.ArrayList;
 
 
 public class Bank
 {
-	private String fName;
-	private Vector<CheckingAccount> fCheckingAccounts;
-	private Vector<SavingsAccount> fSavingAccounts;
+	private String name;
+	private ArrayList<Customer> customers;
 
 	public Bank(String name)
 	{
-		fName = name;
-		fCheckingAccounts = new Vector<CheckingAccount>();
-		fSavingAccounts = new Vector<SavingsAccount>();
+		this.name = name;
+		customers = new ArrayList<Customer>();
 	}
 
 
-	public int openSimpleCheckingAccount(String name, String street, String zipcode, String town, String country)
+	public int openSimpleCheckingAccount(Customer customer)
 	{
-        CheckingAccount newAccount = new CheckingAccount(name, street, zipcode, town, country);
-		fCheckingAccounts.add(newAccount);
-		return newAccount.getAccountNumber();
+	    customers.add(customer);
+	    return customer.addCheckingAccount().getAccountNumber();
 	}
 
-	public int openFullPackage(String name, String street, String zipcode, String town, String country)
-	{
-	    openSimpleCheckingAccount(name, street, zipcode, town, country);
-	    CheckingAccount newAccount = fCheckingAccounts.lastElement();
-		newAccount.applyForCreditCard(name, street, zipcode, town, country, newAccount.getAccountNumber());
-		SavingsAccount newSavingsAccount = new SavingsAccount(name, street, zipcode, town, country);
-	    DebitCard newDebitCard = new DebitCard("Bob Smith", "1 Main St.", "12345", "Tacoma", "USA", newAccount);
-		fSavingAccounts.add(newSavingsAccount);
-		return newAccount.getAccountNumber();
+	public int openFullPackage(Customer customer) {
+	    openSimpleCheckingAccount(customer);
+	    CheckingAccount checkingsAccount = customer.getCheckingsAccounts().get(customer.getCheckingsAccounts().size() - 1);
+		checkingsAccount.applyForCreditCard();
+		customer.addSavingsAccount();
+		checkingsAccount.addDebitCard();
+		return checkingsAccount.getAccountNumber();
 	}
 
 	public boolean withdrawMoney(int accountNumber, double amount)
 	{
-		CheckingAccount account = new CheckingAccount(accountNumber);
-		int index = fCheckingAccounts.indexOf(account);
-		return fCheckingAccounts.elementAt(index).withdrawal(amount);
+	    for(Customer customer: customers) {
+	        for(CheckingAccount account : customer.getCheckingsAccounts()) {
+	            if(account.getAccountNumber() == accountNumber) {
+	                account.withdrawal(amount);
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
 
-    public String getfName() {
-        return fName;
+    public String getName() {
+        return name;
     }
 }

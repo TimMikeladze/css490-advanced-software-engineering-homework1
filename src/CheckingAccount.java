@@ -1,33 +1,23 @@
 public class CheckingAccount {
 
     private int fAccountNumber;
-    private String fName;
-    private String fStreet;
-    private String fZipcode;
-    private String fTown;
-    private String fCountry;
     private boolean fDebitAllowed;
     private double fDebitAmount;
     private double fBalance;
+    private Customer customer;
     private static double costs = 1; // per period there is a cost associated with this account
                                      // that equals 1 pound
     private static double debitRate = 4.7;
-    private static CreditCard fCreditCard;
-    private static SavingsAccount fSavingsAccount;
-    private static DebitCard fDebitCard;
     private static int fNextAccountNumber = 0;
 
-    public CheckingAccount(String name, String street, String zipcode, String town, String country) {
-        this(name, street, zipcode, town, country, 0);
+    private DebitCard debitCard;
 
+    public CheckingAccount(Customer customer) {
+        this(customer, 0);
     }
 
-    public CheckingAccount(String name, String street, String zipCode, String town, String country, float debit) {
-        fName = name;
-        fStreet = street;
-        fZipcode = zipCode;
-        fTown = town;
-        fCountry = country;
+    public CheckingAccount(Customer customer, float debit) {
+        this.customer = customer;
         fAccountNumber = fNextAccountNumber;
         fNextAccountNumber++;
         fDebitAllowed = debit > 0 ? true : false;
@@ -48,11 +38,11 @@ public class CheckingAccount {
     public void print() {
         System.out.println("**************************************");
         System.out.println("Savings account:     " + fAccountNumber);
-        System.out.println("Account holder name: " + fName);
-        System.out.println("Address:             " + fStreet);
-        System.out.print("                     " + fZipcode);
-        System.out.println(" " + fTown);
-        System.out.println(fCountry.toUpperCase());
+        System.out.println("Account holder name: " + customer.getName());
+        System.out.println("Address:             " + customer.getStreet());
+        System.out.print("                     " + customer.getZipCode());
+        System.out.println(" " + customer.getTown());
+        System.out.println(customer.getCountry().toUpperCase());
         System.out.println("**************************************");
         System.out.println("Balance:  " + fBalance);
         System.out.println("**************************************");
@@ -75,8 +65,7 @@ public class CheckingAccount {
         fBalance += amount;
     }
 
-    public boolean applyForCreditCard(String name, String street, String zipCode, String town, String country,
-            int accountNumber) {
+    public boolean applyForCreditCard() {
         double limit = 0;
 
         if (fBalance < 0) {
@@ -85,8 +74,12 @@ public class CheckingAccount {
         if (fBalance > 5000) {
             limit = 5000;
         }
-        fCreditCard = new CreditCard(name, street, town, zipCode, country, limit);
+        customer.addCreditCard(new CreditCard(limit));
         return true;
+    }
+
+    public void addDebitCard() {
+        debitCard = new DebitCard(this);
     }
 
     public double getBalance() {

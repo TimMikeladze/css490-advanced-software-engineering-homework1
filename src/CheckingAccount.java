@@ -106,6 +106,10 @@ public class CheckingAccount {
         return fAccountNumber;
     }
 
+    public DebitCard getDebitCard() {
+        return debitCard;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (fAccountNumber == ((CheckingAccount) o).fAccountNumber) {

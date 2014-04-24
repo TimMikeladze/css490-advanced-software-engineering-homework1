@@ -1,17 +1,14 @@
 
-public class SavingsAccount {
-	private int fAccountNumber;
+public class SavingsAccount extends Account {
 	private double balance;
 	private Customer customer;
 	private static double costs = 1; // per period there is a cost associated with this account
 									// that equals 1 pound
 	private static double interestRate = 1.25;
-	private static int fNextAccountNumber = 0;
 
 	public SavingsAccount(Customer customer)
 	{
-		fAccountNumber = fNextAccountNumber;
-		fNextAccountNumber++;
+	    super(customer);
 	}
 
 	public void calculateInterest()

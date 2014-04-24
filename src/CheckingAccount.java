@@ -1,14 +1,10 @@
-public class CheckingAccount {
-
-    private int fAccountNumber;
+public class CheckingAccount extends Account {
     private boolean fDebitAllowed;
     private double fDebitAmount;
     private double fBalance;
-    private Customer customer;
     private static double costs = 1; // per period there is a cost associated with this account
                                      // that equals 1 pound
     private static double debitRate = 4.7;
-    private static int fNextAccountNumber = 0;
 
     private DebitCard debitCard;
 
@@ -17,15 +13,9 @@ public class CheckingAccount {
     }
 
     public CheckingAccount(Customer customer, float debit) {
-        this.customer = customer;
-        fAccountNumber = fNextAccountNumber;
-        fNextAccountNumber++;
+        super(customer);
         fDebitAllowed = debit > 0 ? true : false;
         fDebitAmount = debit;
-    }
-
-    public CheckingAccount(int accountnumber) {
-        fAccountNumber = accountnumber;
     }
 
     public void determineCosts() {
@@ -33,19 +23,6 @@ public class CheckingAccount {
         if (fBalance < 0) {
             fBalance = fBalance - (fBalance * debitRate / 100);
         }
-    }
-
-    public void print() {
-        System.out.println("**************************************");
-        System.out.println("Savings account:     " + fAccountNumber);
-        System.out.println("Account holder name: " + customer.getName());
-        System.out.println("Address:             " + customer.getStreet());
-        System.out.print("                     " + customer.getZipCode());
-        System.out.println(" " + customer.getTown());
-        System.out.println(customer.getCountry().toUpperCase());
-        System.out.println("**************************************");
-        System.out.println("Balance:  " + fBalance);
-        System.out.println("**************************************");
     }
 
     public boolean withdrawal(double amount) {
@@ -102,18 +79,7 @@ public class CheckingAccount {
         fBalance = amount;
     }
 
-    public int getAccountNumber() {
-        return fAccountNumber;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (fAccountNumber == ((CheckingAccount) o).fAccountNumber) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
+    public DebitCard getDebitCard() {
+        return debitCard;
     }
 }

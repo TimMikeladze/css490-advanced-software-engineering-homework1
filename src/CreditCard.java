@@ -1,24 +1,24 @@
 public class CreditCard {
 	
-	private static int fLastCreditCardNumber;
-	private int fCreditCardNumber;
-	private double fLimit; // you cannot spend more than this limit
-	private double fBalance;
+	private static int lastCreditCardNumber;
+	private int creditCardNumber;
+	private double limit; // you cannot spend more than this limit
+	private double balance;
 	
 	public CreditCard() {
 		this(2500);
 	}
 	
 	public CreditCard(double limit) {
-		fLimit = limit;
-		fBalance = 0;
-		fCreditCardNumber = fLastCreditCardNumber;
-		fLastCreditCardNumber++;
+		this.limit = limit;
+		balance = 0;
+		creditCardNumber = lastCreditCardNumber;
+		lastCreditCardNumber++;
 	}
 	
 	public boolean pay(double amount) {
-		if ((fBalance - amount) < -fLimit) {
-			fBalance -= amount;
+		if ((balance - amount) < -limit) {
+			balance -= amount;
 			return true;
 		} else {
 			return false;
@@ -26,7 +26,7 @@ public class CreditCard {
 	}
 	
 	public int getfCreditCardNumber() {
-		return fCreditCardNumber;
+		return creditCardNumber;
 	}
 	
 }

@@ -1,8 +1,8 @@
 public class CheckingAccount extends Account {
 	
-	private boolean fDebitAllowed;
-	private double fDebitAmount;
-	private double fBalance;
+	private boolean debitAllowed;
+	private double debitAmount;
+	private double balance;
 	private static double costs = 1; // per period there is a cost associated with this account
 										// that equals 1 pound
 	private static double debitRate = 4.7;
@@ -15,22 +15,22 @@ public class CheckingAccount extends Account {
 	
 	public CheckingAccount(Customer customer, float debit) {
 		super(customer);
-		fDebitAllowed = debit > 0 ? true : false;
-		fDebitAmount = debit;
+		debitAllowed = debit > 0 ? true : false;
+		debitAmount = debit;
 	}
 	
 	public void determineCosts() {
-		fBalance = fBalance - costs;
-		if (fBalance < 0) {
-			fBalance = fBalance - (fBalance * debitRate / 100);
+		balance = balance - costs;
+		if (balance < 0) {
+			balance = balance - (balance * debitRate / 100);
 		}
 	}
 	
 	public boolean withdrawal(double amount) {
-		if (((fBalance - amount) < 0) && (!fDebitAllowed)) {
+		if (((balance - amount) < 0) && (!debitAllowed)) {
 			return false;
-		} else if ((fBalance - amount) < -fDebitAmount) {
-			fBalance = fBalance - amount;
+		} else if ((balance - amount) < -debitAmount) {
+			balance = balance - amount;
 			return true;
 		} else {
 			return false;
@@ -38,16 +38,16 @@ public class CheckingAccount extends Account {
 	}
 	
 	public void verseMoney(double amount) {
-		fBalance += amount;
+		balance += amount;
 	}
 	
 	public boolean applyForCreditCard() {
 		double limit = 0;
 		
-		if (fBalance < 0) {
+		if (balance < 0) {
 			return false;
 		}
-		if (fBalance > 5000) {
+		if (balance > 5000) {
 			limit = 5000;
 		}
 		customer.addCreditCard(new CreditCard(limit));
@@ -59,23 +59,23 @@ public class CheckingAccount extends Account {
 	}
 	
 	public double getBalance() {
-		return fBalance;
+		return balance;
 	}
 	
 	public void increaseBalance(double amount) {
-		fBalance += amount;
+		balance += amount;
 	}
 	
 	public void decreaseBalance(double amount) {
-		fBalance -= amount;
+		balance -= amount;
 	}
 	
 	public double getDebitAmount() {
-		return fDebitAmount;
+		return debitAmount;
 	}
 	
 	public void setBalance(double amount) {
-		fBalance = amount;
+		balance = amount;
 	}
 	
 	public DebitCard getDebitCard() {

@@ -1,18 +1,18 @@
 public class DebitCard {
 	
-	private static int fLastDebitCardNumber;
-	private CheckingAccount fAccountConnectedTo;
-	private int fDebitCardNumber;
+	private static int lastDebitCardNumber;
+	private CheckingAccount accountConnectedTo;
+	private int debitCardNumber;
 	
 	public DebitCard(CheckingAccount account) {
-		fDebitCardNumber = fLastDebitCardNumber;
-		fLastDebitCardNumber++;
-		fAccountConnectedTo = account;
+		debitCardNumber = lastDebitCardNumber;
+		lastDebitCardNumber++;
+		accountConnectedTo = account;
 	}
 	
 	public boolean pay(double amount) {
-		if ((fAccountConnectedTo.getBalance() - amount) < -fAccountConnectedTo.getDebitAmount()) {
-			fAccountConnectedTo.setBalance(fAccountConnectedTo.getBalance() - amount);
+		if ((accountConnectedTo.getBalance() - amount) < -accountConnectedTo.getDebitAmount()) {
+			accountConnectedTo.setBalance(accountConnectedTo.getBalance() - amount);
 			return true;
 		} else {
 			return false;
@@ -20,7 +20,7 @@ public class DebitCard {
 	}
 	
 	public int getfDebitCardNumber() {
-		return fDebitCardNumber;
+		return debitCardNumber;
 	}
 	
 }

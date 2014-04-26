@@ -1,7 +1,5 @@
-public class CreditCard {
+public class CreditCard extends Card {
 	
-	private static int lastCreditCardNumber;
-	private int creditCardNumber;
 	private double limit; // you cannot spend more than this limit
 	private double balance;
 	
@@ -11,22 +9,16 @@ public class CreditCard {
 	
 	public CreditCard(double limit) {
 		this.limit = limit;
-		balance = 0;
-		creditCardNumber = lastCreditCardNumber;
-		lastCreditCardNumber++;
 	}
 	
+	@Override
 	public boolean pay(double amount) {
+		boolean result = false;
 		if ((balance - amount) < -limit) {
 			balance -= amount;
-			return true;
-		} else {
-			return false;
+			result = true;
 		}
-	}
-	
-	public int getfCreditCardNumber() {
-		return creditCardNumber;
+		return result;
 	}
 	
 }

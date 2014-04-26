@@ -1,26 +1,19 @@
-public class DebitCard {
+public class DebitCard extends Card {
 	
-	private static int lastDebitCardNumber;
-	private CheckingAccount accountConnectedTo;
-	private int debitCardNumber;
+	private CheckingAccount account;
 	
 	public DebitCard(CheckingAccount account) {
-		debitCardNumber = lastDebitCardNumber;
-		lastDebitCardNumber++;
-		accountConnectedTo = account;
+		this.account = account;
 	}
 	
+	@Override
 	public boolean pay(double amount) {
-		if ((accountConnectedTo.getBalance() - amount) < -accountConnectedTo.getDebitAmount()) {
-			accountConnectedTo.setBalance(accountConnectedTo.getBalance() - amount);
-			return true;
-		} else {
-			return false;
+		boolean result = false;
+		if ((account.getBalance() - amount) < -account.getDebitAmount()) {
+			account.setBalance(account.getBalance() - amount);
+			result = true;
 		}
-	}
-	
-	public int getfDebitCardNumber() {
-		return debitCardNumber;
+		return result;
 	}
 	
 }

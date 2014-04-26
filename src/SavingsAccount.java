@@ -2,9 +2,6 @@ public class SavingsAccount extends Account {
 	
 	private static final double INTREREST_RATE = 1.25;
 	
-	private double balance;
-	private Customer customer;
-	
 	public SavingsAccount(Customer customer) {
 		super(customer);
 	}
@@ -22,22 +19,8 @@ public class SavingsAccount extends Account {
 		}
 	}
 	
-	public void verseMoney(double amount) {
+	public void deposit(double amount) {
 		balance += amount;
-	}
-	
-	public void print() {
-		System.out.println("**************************************");
-		System.out.println("Savings account:     " + fAccountNumber);
-		System.out.println("Account holder name: " + customer.getName());
-		System.out.println("Address:             " + customer.getStreet());
-		System.out.print("                     " + customer.getZipCode());
-		System.out.println(" " + customer.getTown());
-		System.out.println(customer.getCountry()
-									.toUpperCase());
-		System.out.println("**************************************");
-		System.out.println("Balance:  " + balance);
-		System.out.println("**************************************");
 	}
 	
 }

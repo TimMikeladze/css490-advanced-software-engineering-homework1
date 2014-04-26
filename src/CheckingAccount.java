@@ -37,7 +37,7 @@ public class CheckingAccount extends Account {
 		}
 	}
 	
-	public void verseMoney(double amount) {
+	public void deposit(double amount) {
 		balance += amount;
 	}
 	

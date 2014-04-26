@@ -1,8 +1,9 @@
 public abstract class Account {
 	
-	protected Customer customer;
-	private int accountNumber;
 	private static int nextAccountNumber = 0;
+	protected Customer customer;
+	protected int accountNumber;
+	protected double balance;
 	
 	public Account(Customer customer) {
 		this.customer = customer;

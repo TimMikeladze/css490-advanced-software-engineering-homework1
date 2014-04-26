@@ -1,11 +1,11 @@
 public class CheckingAccount extends Account {
 	
+	private static final double COSTS = 1;
+	private static final double DEBIT_RATE = 4.7;
+	
 	private boolean debitAllowed;
 	private double debitAmount;
 	private double balance;
-	private static double costs = 1; // per period there is a cost associated with this account
-										// that equals 1 pound
-	private static double debitRate = 4.7;
 	
 	private DebitCard debitCard;
 	
@@ -20,9 +20,9 @@ public class CheckingAccount extends Account {
 	}
 	
 	public void determineCosts() {
-		balance = balance - costs;
+		balance = balance - COSTS;
 		if (balance < 0) {
-			balance = balance - (balance * debitRate / 100);
+			balance = balance - (balance * DEBIT_RATE / 100);
 		}
 	}
 	

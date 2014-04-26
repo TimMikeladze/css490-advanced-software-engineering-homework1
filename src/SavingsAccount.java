@@ -1,17 +1,16 @@
 public class SavingsAccount extends Account {
 	
+	private static final double INTREREST_RATE = 1.25;
+	
 	private double balance;
 	private Customer customer;
-	private static double costs = 1; // per period there is a cost associated with this account
-										// that equals 1 pound
-	private static double interestRate = 1.25;
 	
 	public SavingsAccount(Customer customer) {
 		super(customer);
 	}
 	
 	public void calculateInterest() {
-		balance = balance + (balance * interestRate / 100);
+		balance = balance + (balance * INTREREST_RATE / 100);
 	}
 	
 	public boolean withdrawal(double amount) {

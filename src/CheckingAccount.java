@@ -44,15 +44,12 @@ public class CheckingAccount extends Account {
 	
 	public boolean applyForCreditCard() {
 		double limit = 0;
-		
-		if (balance < 0) {
-			return false;
-		}
+		boolean result = false;
 		if (balance > CREDIT_CARD_REQUIRMENT) {
-			limit = 5000;
+			customer.addCreditCard(new CreditCard(limit));
+			result = true;
 		}
-		customer.addCreditCard(new CreditCard(limit));
-		return true;
+		return result;
 	}
 	
 	public void addDebitCard() {

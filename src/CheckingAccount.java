@@ -1,5 +1,6 @@
 public class CheckingAccount extends Account {
 	
+	private static final int CREDIT_CARD_REQUIRMENT = 5000;
 	private static final double COSTS = 1;
 	private static final double DEBIT_RATE = 4.7;
 	
@@ -47,7 +48,7 @@ public class CheckingAccount extends Account {
 		if (balance < 0) {
 			return false;
 		}
-		if (balance > 5000) {
+		if (balance > CREDIT_CARD_REQUIRMENT) {
 			limit = 5000;
 		}
 		customer.addCreditCard(new CreditCard(limit));

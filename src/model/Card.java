@@ -1,3 +1,9 @@
+package model;
+
+/**
+ * Abstract class for cards
+ * 
+ */
 public abstract class Card {
 	
 	private static int lastCardNumber;

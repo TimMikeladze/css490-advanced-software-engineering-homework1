@@ -1,3 +1,9 @@
+
+package model;
+/**
+ * The credit card.
+ * 
+ */
 public class CreditCard extends Card {
 	
 	private double limit; // you cannot spend more than this limit
@@ -14,8 +20,8 @@ public class CreditCard extends Card {
 	@Override
 	public boolean pay(double amount) {
 		boolean result = false;
-		if ((balance - amount) < -limit) {
-			balance -= amount;
+		if ((balance + amount) <= limit) {
+			balance += amount;
 			result = true;
 		}
 		return result;
